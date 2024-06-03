@@ -1,35 +1,39 @@
 import React, { useState } from 'react';
-import Slider from 'react-slick';
 import './index.css';
-import image1 from '../public/assets/Beauty Tuesday.jpg';
-import image2 from '../public/assets/Brita Water.jpg';
-import image3 from '../public/assets/Exclusive Products On Jumia.jpg';
-import image4 from '../public/assets/Flash Sales.jpg';
-import image5 from '../public/assets/Jumia Shopping Festival.jpg';
-import image6 from '../public/assets/JumiaPay Providus Bank.jpg';
-import image7 from '../public/assets/MayBelline MakeUp Products.jpg';
-
 
 const App = () => {
-    const [images, setImages] = useState([
-      'image1.jpg',
-      'image2.jpg',
-      'image3.jpg',
-      'image4.jpg',
-      'image5.jpg',
-      'image6.jpg',
-      'image7.jpg',
-    ]);
+  const [images, setImages] = useState([
+    'src/images/Beauty Tuesday.jpg',
+    'src/images/Brita Water.jpg',
+    'src/images/Flash Sales.jpg',
+    'src/images/Jumia Shopping Festival.jpg',
+    'src/images/JumiaPay Providus Bank.jpg',
+    'src/images/MayBelline MakeUp Products.jpg',
+  ]);
 
-  
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handlePrev = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentImageIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+  };
+
+  console.log("Current image path:", images[currentImageIndex]);
 
   return (
-    <div className="parent-container">
-      <div className="inner-container">
-      <h1>{slider}</h1>
-      <div onClick={handleSwipe}>Swipe</div>
-    </div>
-
+    <div className="inner-container">
+      <div className="slider-container">
+        <button onClick={handlePrev} className="prev-button">Previous</button>
+        <img 
+          src={images[currentImageIndex]} 
+          alt={`Slide ${currentImageIndex + 1}`} 
+          className="slider-image" 
+        />
+        <button onClick={handleNext} className="next-button">Next</button>
+      </div>
     </div>
   );
 };
